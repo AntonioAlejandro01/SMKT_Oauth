@@ -1,0 +1,195 @@
+{
+	"info": {
+		"_postman_id": "a17ebdf5-518f-47b2-a313-e8f2e366ca0b",
+		"name": "SMKT_Oauth",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "{{username}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:9100/oauth/token",
+					"host": [
+						"localhost"
+					],
+					"port": "9100",
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh Token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "{{username}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "refresh_token",
+							"type": "text"
+						},
+						{
+							"key": "refresh_token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJ0ZXN0Iiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sImF0aSI6IjJhYmQ2MzcxLTJhZWItNDBlMi05ZGExLTYyN2ViZjE3Y2MzNiIsIm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNjAxODIzMjUyLCJhdXRob3JpdGllcyI6WyJ0ZXN0Il0sImp0aSI6ImNmNjE5NDNkLTViOGYtNDJlMi1iMjllLWI5ZGIwMWZlMzU0MiIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsImNsaWVudF9pZCI6InNtYXJ0a2l0Y2hlbmFwcCIsImxhc3RuYW1lIjoidGVzdDIifQ.B-yU5OsfS-plicIdihhPjUg3pv3EHcSvMtgvDQQZO1Q",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:9100/oauth/token",
+					"host": [
+						"localhost"
+					],
+					"port": "9100",
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Antonio\",\n    \"lastname\": \"Garcia\",\n    \"username\": \"AntoGar\",\n    \"password\": \"antonio\",\n    \"email\": \"antonio@antonio.com\",\n    \"photo\": \"perfil.jpg\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9100/auth/",
+					"host": [
+						"localhost"
+					],
+					"port": "9100",
+					"path": [
+						"auth",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Antonio Alejandro\",\n    \"lastname\": \"Garcia\",\n    \"username\": \"AntoGar\",\n    \"password\": \"antonio\",\n    \"email\": \"antonio@antonio2.com\",\n    \"photo\": \"perfil.jpg\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9100/auth/3",
+					"host": [
+						"localhost"
+					],
+					"port": "9100",
+					"path": [
+						"auth",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:9100/auth/3",
+					"host": [
+						"localhost"
+					],
+					"port": "9100",
+					"path": [
+						"auth",
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "username",
+				"value": "smartkitchenapp",
+				"type": "string"
+			},
+			{
+				"key": "password",
+				"value": "13331",
+				"type": "string"
+			}
+		]
+	},
+	"protocolProfileBehavior": {}
+}

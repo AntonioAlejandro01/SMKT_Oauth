@@ -1,0 +1,32 @@
+spring:
+ application:
+  name:
+   smkt-oauth
+server:
+ port:
+  9100
+eureka:
+ client:
+  service-url:
+   defaultZone:
+    http://localhost:8761/eureka/
+  fetchRegistry: true
+config:
+ security:
+  oauth:
+   client:
+    id:
+     smartkitchenapp
+    secret:
+     13331
+    client:
+     aW50cmFtZXRhcHA6MTIzNDU=      
+   jwt:
+    key:
+     /bstUZtRxhYhGOEnGLGA+cbuFv+Gs1TWMs+bqiXjNrY=   
+oauth2:
+ url:
+  loginfail:
+    http://localhost:4200/loginError
+  loginsuccess:
+    http://localhost:4200/login
