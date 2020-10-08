@@ -16,7 +16,6 @@ import com.antonioalejandro.smkt.oauth.pojo.User;
 import com.antonioalejandro.smkt.oauth.pojo.UserRegistrationDTO;
 import com.antonioalejandro.smkt.oauth.services.AuthService;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/auth/")
 public class OAuthController {
@@ -24,14 +23,16 @@ public class OAuthController {
 	@Autowired
 	private AuthService authService;
 	
+
+	
 	@PostMapping("/")
 	public ResponseEntity<User> createUser(@RequestBody final UserRegistrationDTO userRegistrationDTO){
 		final User user = authService.create(userRegistrationDTO);
 		return user == null ? new ResponseEntity<>(HttpStatus.BAD_REQUEST):new ResponseEntity<User>(user,HttpStatus.OK);
 	}
-	@PutMapping("/{id}")
-	public ResponseEntity<User> updateUser(@RequestBody final User user, @PathVariable("id") final Long id){
-		return new ResponseEntity<User>(authService.update(user, id), HttpStatus.OK);
+	@PutMapping("/{oldUsername}")
+	public ResponseEntity<User> updateUser(@RequestBody final User user, @PathVariable("oldUsername") final String oldUsername){
+		return new ResponseEntity<User>(authService.update(user, oldUsername), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}")

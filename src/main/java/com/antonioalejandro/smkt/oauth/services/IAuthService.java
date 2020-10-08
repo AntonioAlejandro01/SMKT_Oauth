@@ -18,7 +18,7 @@ public interface IAuthService {
 	 * @param id
 	 * @return
 	 */
-	public User update(User user, Long id);
+	public User update(User user, String oldUsername);
 
 	/**
 	 * 

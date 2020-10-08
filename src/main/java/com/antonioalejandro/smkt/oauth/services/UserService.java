@@ -30,9 +30,9 @@ public class UserService implements IUserService, UserDetailsService {
 
 		try {
 			final User user = client.findByUserName(username);
-			final GrantedAuthority authority = new SimpleGrantedAuthority(user.getName());
+			final GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().getName());
 			log.info("Usuario autenticado: " + username);
-			log.info("ID: " + user.getId()+", USERNAME: "+ user.getUsername()+", EMAIL: "+ user.getEmail());
+			log.info("ID: " + user.getId()+", USERNAME: "+ user.getUsername()+", EMAIL: "+ user.getEmail() +"Role: " + authority.getAuthority());
 
 			return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
 					true, true, true, true, Arrays.asList(authority));

@@ -9,7 +9,7 @@ eureka:
  client:
   service-url:
    defaultZone:
-    http://localhost:8761/eureka/
+    http://172.0.0.3:8761/eureka/
   fetchRegistry: true
 config:
  security:

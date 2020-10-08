@@ -19,8 +19,8 @@ public class AuthService implements IAuthService{
 	}
 
 	@Override
-	public User update(User user, Long id) {
-		return userFeignClient.update(user, id);
+	public User update(User user, String oldUsername) {
+		return userFeignClient.update(user, userFeignClient.findByUserName(oldUsername).getId());
 	}
 
 	@Override
