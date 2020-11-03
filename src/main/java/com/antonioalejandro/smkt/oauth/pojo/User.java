@@ -7,11 +7,9 @@ public class User {
 	private String username;
 	private String email;
 	private String password;
-	private String photo;
 	private Role role;
 	
-	public User(Long id, String name, String lastname, String username, String email, String password, String photo,
-			Role role) {
+	public User(Long id, String name, String lastname, String username, String email, String password, Role role) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -19,7 +17,6 @@ public class User {
 		this.username = username;
 		this.email = email;
 		this.password = password;
-		this.photo = photo;
 		this.role = role;
 	}
 	
@@ -72,14 +69,6 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getPhoto() {
-		return photo;
-	}
-
-	public void setPhoto(String photo) {
-		this.photo = photo;
 	}
 
 	public Role getRole() {
