@@ -1,10 +1,94 @@
 {
 	"info": {
-		"_postman_id": "a17ebdf5-518f-47b2-a313-e8f2e366ca0b",
+		"_postman_id": "9880d87f-ee5b-437b-8c43-1eeb96a0f8c0",
 		"name": "SMKT_Oauth",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"test\",\n    \"lastname\": \"test2\",\n    \"username\": \"test\",\n    \"password\": \"password\",\n    \"email\": {{$randomEmail}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9100/auth/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9100",
+							"path": [
+								"auth",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"test updated\",\n    \"lastname\": \"test2\",\n    \"username\": \"test\",\n    \"password\": \"password\",\n    \"email\": {{$randomEmail}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9100/auth/{{oldUsername}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9100",
+							"path": [
+								"auth",
+								"{{oldUsername}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9100/auth/{{idDelete}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9100",
+							"path": [
+								"auth",
+								"{{idDelete}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
 		{
 			"name": "Token",
 			"request": {
@@ -81,7 +165,7 @@
 						},
 						{
 							"key": "refresh_token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJ0ZXN0Iiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sImF0aSI6IjJhYmQ2MzcxLTJhZWItNDBlMi05ZGExLTYyN2ViZjE3Y2MzNiIsIm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNjAxODIzMjUyLCJhdXRob3JpdGllcyI6WyJ0ZXN0Il0sImp0aSI6ImNmNjE5NDNkLTViOGYtNDJlMi1iMjllLWI5ZGIwMWZlMzU0MiIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsImNsaWVudF9pZCI6InNtYXJ0a2l0Y2hlbmFwcCIsImxhc3RuYW1lIjoidGVzdDIifQ.B-yU5OsfS-plicIdihhPjUg3pv3EHcSvMtgvDQQZO1Q",
+							"value": "{{refreshToken}}",
 							"type": "text"
 						}
 					]
@@ -99,97 +183,7 @@
 				}
 			},
 			"response": []
-		},
-		{
-			"name": "Create User",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\": \"Antonio\",\n    \"lastname\": \"Garcia\",\n    \"username\": \"AntoGar\",\n    \"password\": \"antonio\",\n    \"email\": \"antonio@antonio.com\",\n    \"photo\": \"perfil.jpg\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:9100/auth/",
-					"host": [
-						"localhost"
-					],
-					"port": "9100",
-					"path": [
-						"auth",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Update User",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\": \"Antonio Alejandro\",\n    \"lastname\": \"Garcia\",\n    \"username\": \"AntoGar\",\n    \"password\": \"antonio\",\n    \"email\": \"antonio@antonio2.com\",\n    \"photo\": \"perfil.jpg\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:9100/auth/3",
-					"host": [
-						"localhost"
-					],
-					"port": "9100",
-					"path": [
-						"auth",
-						"3"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete User",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "localhost:9100/auth/3",
-					"host": [
-						"localhost"
-					],
-					"port": "9100",
-					"path": [
-						"auth",
-						"3"
-					]
-				}
-			},
-			"response": []
 		}
 	],
-	"auth": {
-		"type": "basic",
-		"basic": [
-			{
-				"key": "username",
-				"value": "smartkitchenapp",
-				"type": "string"
-			},
-			{
-				"key": "password",
-				"value": "13331",
-				"type": "string"
-			}
-		]
-	},
 	"protocolProfileBehavior": {}
 }
