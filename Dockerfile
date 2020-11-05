@@ -2,7 +2,7 @@ FROM openjdk:11
 
 WORKDIR /opt/server
 
-COPY ./target/smkt-oauth-0.0.1.jar ./app.jar
+COPY ./target/smkt-oauth-1.0.0.jar ./app.jar
 
 EXPOSE 4050
 
