@@ -1,5 +1,8 @@
 # SMKT_Oauth
-MS to manage tokens
+Micro-service to manage tokens
+
+![](smktoauth.png)
+
 ## Others Micro-Service
 - [SMKT_Eureka](https://github.com/AntonioAlejandro01/SMKT_Eureka)
 - [SMKT_Gateway](https://github.com/AntonioAlejandro01/SMKT_Gateway)
