@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -20,20 +19,12 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
-import com.antonioalejandro.smkt.oauth.pojo.Oauth2Properties;
-
-
+import com.antonioalejandro.smkt.oauth.config.OauthProperties;
 
 @RefreshScope
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
-
-	private static final int RESTTEMPLATE_TIMEOUT = 300000;
-
-	private static final String WRITE = "write";
-
-	private static final String READ = "read";
 
 	private static final String REFRESH_TOKEN = "refresh_token";
 
@@ -44,7 +35,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	private static final int ACCESS_TOKEN_VALID_TIME = 3600;
 
 	@Autowired
-	private Oauth2Properties oauth2Properties;
+	private OauthProperties oauth2Properties;
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -59,23 +50,19 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-		security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
+		security.tokenKeyAccess("isAuthenticated()").checkTokenAccess("isAuthenticated()");
 	}
 
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 
-		log.log(Level.INFO, " Property 1: {0} ", oauth2Properties.getOauthClientId());
-		log.log(Level.INFO, " Property 2: {0} ", oauth2Properties.getOauthClientSecret());
-		log.log(Level.INFO, " Property 3: {0} ", oauth2Properties.getOauthLoginSuccess());
-		log.log(Level.INFO, " Property 4: {0} ", oauth2Properties.getOauthLoginFail());
-		log.log(Level.INFO, " Property 5: {0} ", oauth2Properties.getOauthJWTKey());
-		
+		log.log(Level.INFO, " Property 1: {0} ", oauth2Properties.getClientId());
+		log.log(Level.INFO, " Property 2: {0} ", oauth2Properties.getClientSecret());
+		log.log(Level.INFO, " Property 5: {0} ", oauth2Properties.getKeyJWT());
 
-		clients.inMemory()
-				.withClient(oauth2Properties.getOauthClientId())
-				.secret(passwordEncoder.encode(oauth2Properties.getOauthClientSecret())).scopes(READ, WRITE)
-				.authorizedGrantTypes(getSecretGrant(), REFRESH_TOKEN)
+		clients.inMemory().withClient(oauth2Properties.getClientId())
+				.secret(passwordEncoder.encode(oauth2Properties.getClientSecret()))
+				.authorizedGrantTypes(getSecretGrant(), REFRESH_TOKEN).scopes("READ")
 				.accessTokenValiditySeconds(ACCESS_TOKEN_VALID_TIME)
 				.refreshTokenValiditySeconds(REFRESH_TOKEN_VALID_TIME);
 	}
@@ -83,7 +70,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	public String getSecretGrant() {
 		return PASS;
 	}
-	
 
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
@@ -101,7 +87,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Bean
 	public JwtAccessTokenConverter accessTokenConverter() {
 		final JwtAccessTokenConverter tokenConverter = new JwtAccessTokenConverter();
-		tokenConverter.setSigningKey(oauth2Properties.getOauthJWTKey());
+		tokenConverter.setSigningKey(oauth2Properties.getKeyJWT());
 		return tokenConverter;
 	}
 
