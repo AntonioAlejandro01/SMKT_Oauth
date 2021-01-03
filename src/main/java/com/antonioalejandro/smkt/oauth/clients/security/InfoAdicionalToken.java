@@ -1,3 +1,10 @@
+/*
+ * @Author AntonioAlejandro01
+ * 
+ * @link http://antonioalejandro.com
+ * @link https://github.com/AntonioAlejandro01/SMKT_Users
+ * 
+ */
 package com.antonioalejandro.smkt.oauth.clients.security;
 
 import java.util.HashMap;
@@ -17,12 +24,23 @@ import com.antonioalejandro.smkt.oauth.pojo.UserResponse;
 import com.antonioalejandro.smkt.oauth.services.IOauthService;
 import com.antonioalejandro.smkt.oauth.utils.Constants;
 
+/**
+ * The Class InfoAdicionalToken.
+ */
 @Component
 public class InfoAdicionalToken implements TokenEnhancer {
 
+	/** The oauth service. */
 	@Autowired
 	private IOauthService oauthService;
 
+	/**
+	 * Enhance.
+	 *
+	 * @param accessToken    the access token
+	 * @param authentication the authentication
+	 * @return the o auth 2 access token
+	 */
 	@Override
 	public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
 		final Map<String, Object> info = new HashMap<>();
@@ -37,6 +55,12 @@ public class InfoAdicionalToken implements TokenEnhancer {
 		return accessToken;
 	}
 
+	/**
+	 * Gets the scopes from user.
+	 *
+	 * @param user the user
+	 * @return the scopes from user
+	 */
 	private Set<String> getScopesFromUser(UserResponse.User user) {
 		RoleResponse roleResponse = oauthService.findRoleByName(user.getRole());
 		if (roleResponse.getRole() == null) {

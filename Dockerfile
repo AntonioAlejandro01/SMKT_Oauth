@@ -1,9 +1,26 @@
+FROM maven:3-openjdk-11 as build
+
+WORKDIR /opt/build
+
+COPY . .
+
+RUN mvn clean compile install
+
+RUN mv ./target/smkt-oauth-1.0.0.jar /app.jar
+
 FROM openjdk:11
 
 WORKDIR /opt/server
 
-COPY ./target/smkt-oauth-1.0.0.jar ./app.jar
+COPY --from=build /app.jar  ./app.jar
 
-EXPOSE 4050
+ARG port=9100
+ARG eureka_url=http://smkt-eureka:8761/eureka
 
-CMD [ "java", "-jar", "./app.jar" ]
+ENV PORT ${port}
+ENV EUREKA_URL ${eureka_url}
+
+EXPOSE ${PORT}
+
+CMD java -jar app.jar --server.port="${PORT}" --eureka.client.service-url.defaultZone="${EUREKA_URL}"
+
