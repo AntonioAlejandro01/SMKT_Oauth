@@ -11,7 +11,9 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * The Class UserResponse.
@@ -21,7 +23,9 @@ import lombok.Data;
 /**
  * Instantiates a new user response.
  */
-@Data
+@Getter
+@Setter
+@ToString
 public class UserResponse {
 
 	/** The message. */
@@ -39,7 +43,9 @@ public class UserResponse {
 	/**
 	 * Instantiates a new user.
 	 */
-	@Data
+	@Getter
+	@Setter
+	@ToString
 	public class User {
 
 		/** The id. */

@@ -9,12 +9,16 @@ package com.antonioalejandro.smkt.oauth.pojo;
 
 import java.util.List;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * Instantiates a new scope response.
  */
-@Data
+@Getter
+@Setter
+@ToString
 public class ScopeResponse {
 
 	/** The message. */

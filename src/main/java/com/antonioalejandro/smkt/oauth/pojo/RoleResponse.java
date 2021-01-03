@@ -9,12 +9,16 @@ package com.antonioalejandro.smkt.oauth.pojo;
 
 import java.util.List;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * Instantiates a new role response.
  */
-@Data
+@Getter
+@Setter
+@ToString
 public class RoleResponse {
 
 	/** The status. */
@@ -32,7 +36,9 @@ public class RoleResponse {
 	/**
 	 * Instantiates a new role.
 	 */
-	@Data
+	@Getter
+	@Setter
+	@ToString
 	public class Role {
 
 		/** The id. */
