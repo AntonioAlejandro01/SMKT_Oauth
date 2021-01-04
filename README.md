@@ -2,6 +2,7 @@
 
 Micro-service to manage tokens
 
+![Scan](https://github.com/AntonioAlejandro01/SMKT_Oauth/workflows/Scan/badge.svg?branch=master)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=AntonioAlejandro01_SMKT_Oauth&metric=coverage)](https://sonarcloud.io/dashboard?id=AntonioAlejandro01_SMKT_Oauth)
 
 ![X](smktoauth.png)
