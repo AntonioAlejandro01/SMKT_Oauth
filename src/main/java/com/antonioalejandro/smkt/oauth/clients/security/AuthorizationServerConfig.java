@@ -1,14 +1,18 @@
+/*
+ * @Author AntonioAlejandro01
+ * 
+ * @link http://antonioalejandro.com
+ * @link https://github.com/AntonioAlejandro01/SMKT_Users
+ * 
+ */
 package com.antonioalejandro.smkt.oauth.clients.security;
 
 import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -20,71 +24,95 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
-import com.antonioalejandro.smkt.oauth.pojo.Oauth2Properties;
+import com.antonioalejandro.smkt.oauth.config.OauthProperties;
+
+import lombok.extern.slf4j.Slf4j;
 
 
 
+
+/**
+ * The Class AuthorizationServerConfig.
+ */
+@Slf4j
 @RefreshScope
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
-	private static final int RESTTEMPLATE_TIMEOUT = 300000;
-
-	private static final String WRITE = "write";
-
-	private static final String READ = "read";
-
+	/** The Constant REFRESH_TOKEN. */
 	private static final String REFRESH_TOKEN = "refresh_token";
 
+	/** The Constant PASS. */
 	private static final String PASS = "password";
 
+	/** The Constant REFRESH_TOKEN_VALID_TIME. */
 	private static final int REFRESH_TOKEN_VALID_TIME = 7200;
 
+	/** The Constant ACCESS_TOKEN_VALID_TIME. */
 	private static final int ACCESS_TOKEN_VALID_TIME = 3600;
 
+	/** The oauth 2 properties. */
 	@Autowired
-	private Oauth2Properties oauth2Properties;
+	private OauthProperties oauth2Properties;
 
+	/** The password encoder. */
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
+	/** The authentication manager. */
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
+	/** The info adicional token. */
 	@Autowired
 	private InfoAdicionalToken infoAdicionalToken;
 
-	private static final Logger log = Logger.getLogger(AuthorizationServerConfig.class.getName());
-
+	/**
+	 * Configure.
+	 *
+	 * @param security the security
+	 * @throws Exception the exception
+	 */
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-		security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
+		security.tokenKeyAccess("isAuthenticated()").checkTokenAccess("isAuthenticated()");
 	}
 
+	/**
+	 * Configure.
+	 *
+	 * @param clients the clients
+	 * @throws Exception the exception
+	 */
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+		log.info("Property 1: {}",oauth2Properties.getClientId());
+		log.info("Property 2: {}", oauth2Properties.getClientSecret());
+		log.info("Property 3: {}", oauth2Properties.getKeyJWT());
 
-		log.log(Level.INFO, " Property 1: {0} ", oauth2Properties.getOauthClientId());
-		log.log(Level.INFO, " Property 2: {0} ", oauth2Properties.getOauthClientSecret());
-		log.log(Level.INFO, " Property 3: {0} ", oauth2Properties.getOauthLoginSuccess());
-		log.log(Level.INFO, " Property 4: {0} ", oauth2Properties.getOauthLoginFail());
-		log.log(Level.INFO, " Property 5: {0} ", oauth2Properties.getOauthJWTKey());
-		
-
-		clients.inMemory()
-				.withClient(oauth2Properties.getOauthClientId())
-				.secret(passwordEncoder.encode(oauth2Properties.getOauthClientSecret())).scopes(READ, WRITE)
-				.authorizedGrantTypes(getSecretGrant(), REFRESH_TOKEN)
+		clients.inMemory().withClient(oauth2Properties.getClientId())
+				.secret(passwordEncoder.encode(oauth2Properties.getClientSecret()))
+				.authorizedGrantTypes(getSecretGrant(), REFRESH_TOKEN).scopes("READ")
 				.accessTokenValiditySeconds(ACCESS_TOKEN_VALID_TIME)
 				.refreshTokenValiditySeconds(REFRESH_TOKEN_VALID_TIME);
 	}
 
+	/**
+	 * Gets the secret grant.
+	 *
+	 * @return the secret grant
+	 */
 	public String getSecretGrant() {
 		return PASS;
 	}
-	
 
+	/**
+	 * Configure.
+	 *
+	 * @param endpoints the endpoints
+	 * @throws Exception the exception
+	 */
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		final TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
@@ -93,15 +121,25 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 				.accessTokenConverter(accessTokenConverter()).tokenEnhancer(tokenEnhancerChain);
 	}
 
+	/**
+	 * Token store.
+	 *
+	 * @return the jwt token store
+	 */
 	@Bean
 	public JwtTokenStore tokenStore() {
 		return new JwtTokenStore(accessTokenConverter());
 	}
 
+	/**
+	 * Access token converter.
+	 *
+	 * @return the jwt access token converter
+	 */
 	@Bean
 	public JwtAccessTokenConverter accessTokenConverter() {
 		final JwtAccessTokenConverter tokenConverter = new JwtAccessTokenConverter();
-		tokenConverter.setSigningKey(oauth2Properties.getOauthJWTKey());
+		tokenConverter.setSigningKey(oauth2Properties.getKeyJWT());
 		return tokenConverter;
 	}
 
