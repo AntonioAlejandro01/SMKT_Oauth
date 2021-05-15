@@ -34,7 +34,7 @@ jobs:
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
   docker:
     name: Docker
-    needs: [build]
+    needs: [Sonar]
     runs-on: ubuntu-latest
     steps:
       - name: Set up QEMU
