@@ -4,8 +4,11 @@ on:
   push:
     branches:
       - develop
+  pull_request:
+    branches: [master,develop]
+    types: [opened,synchronize]
 jobs:
-  build:
+  sonar:
     name: Sonar
     runs-on: ubuntu-latest
     steps:

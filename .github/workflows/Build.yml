@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches: [master]
+    types: [closed]
 jobs:
   sonar:
     name: Sonar
@@ -34,7 +37,7 @@ jobs:
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
   docker:
     name: Docker
-    needs: [Sonar]
+    needs: [sonar]
     runs-on: ubuntu-latest
     steps:
       - name: Set up QEMU
