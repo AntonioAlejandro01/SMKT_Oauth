@@ -8,6 +8,7 @@
 package com.antonioalejandro.smkt.oauth.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import lombok.Getter;
 
@@ -15,6 +16,7 @@ import lombok.Getter;
  * The Class OauthProperties.
  */
 @Getter
+@Component
 public class OauthProperties {
 
 	/** The client id. */

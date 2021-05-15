@@ -1,21 +1,20 @@
-package com.antonioalejandro.smkt.oauth.pojo.test;
+package com.antonioalejandro.smkt.oauth.model.test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import com.antonioalejandro.smkt.oauth.UtilsForTesting;
-import com.antonioalejandro.smkt.oauth.pojo.RoleResponse;
+import com.antonioalejandro.smkt.oauth.model.RoleResponse;
 
 class RoleResponseTest {
 
 	@Test
 	void test() throws Exception {
 		RoleResponse response = new RoleResponse();
-		response.setMessage(UtilsForTesting.DATA_OK);
-		response.setStatus(UtilsForTesting.DATA_OK);
+		response.setMessage("ok");
+		response.setStatus("ok");
 		response.setRole(response.new Role());
 		response.setRoles(List.of());
 		assertNotNull(response.getMessage());
@@ -23,6 +22,6 @@ class RoleResponseTest {
 		assertNotNull(response.getRoles());
 		assertNotNull(response.toString());
 		assertNotNull(response.getRole().toString());
-		
+
 	}
 }

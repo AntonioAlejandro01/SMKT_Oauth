@@ -5,7 +5,7 @@
  * @link https://github.com/AntonioAlejandro01/SMKT_Users
  * 
  */
-package com.antonioalejandro.smkt.oauth.pojo;
+package com.antonioalejandro.smkt.oauth.model;
 
 import java.util.List;
 

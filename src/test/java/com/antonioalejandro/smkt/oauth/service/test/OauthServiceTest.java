@@ -3,7 +3,6 @@ package com.antonioalejandro.smkt.oauth.service.test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,12 +14,12 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 
-import com.antonioalejandro.smkt.oauth.services.OauthService;
+import com.antonioalejandro.smkt.oauth.services.impl.OauthServiceImpl;
 
 class OauthServiceTest {
 
 	@InjectMocks
-	private OauthService service;
+	private OauthServiceImpl service;
 
 	@Mock
 	private DiscoveryClient client;

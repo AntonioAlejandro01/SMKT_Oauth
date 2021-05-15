@@ -5,7 +5,7 @@
  * @link https://github.com/AntonioAlejandro01/SMKT_Users
  * 
  */
-package com.antonioalejandro.smkt.oauth.clients.security;
+package com.antonioalejandro.smkt.oauth.config.security;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,10 +18,10 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.stereotype.Component;
 
-import com.antonioalejandro.smkt.oauth.pojo.RoleResponse;
-import com.antonioalejandro.smkt.oauth.pojo.ScopeResponse;
-import com.antonioalejandro.smkt.oauth.pojo.UserResponse;
-import com.antonioalejandro.smkt.oauth.services.IOauthService;
+import com.antonioalejandro.smkt.oauth.model.RoleResponse;
+import com.antonioalejandro.smkt.oauth.model.ScopeResponse;
+import com.antonioalejandro.smkt.oauth.model.UserResponse;
+import com.antonioalejandro.smkt.oauth.services.OauthService;
 import com.antonioalejandro.smkt.oauth.utils.Constants;
 
 /**
@@ -32,7 +32,7 @@ public class InfoAdicionalToken implements TokenEnhancer {
 
 	/** The oauth service. */
 	@Autowired
-	private IOauthService oauthService;
+	private OauthService oauthService;
 
 	/**
 	 * Enhance.

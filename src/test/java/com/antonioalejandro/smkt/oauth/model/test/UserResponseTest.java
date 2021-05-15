@@ -1,21 +1,21 @@
-package com.antonioalejandro.smkt.oauth.pojo.test;
+package com.antonioalejandro.smkt.oauth.model.test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import com.antonioalejandro.smkt.oauth.UtilsForTesting;
-import com.antonioalejandro.smkt.oauth.pojo.UserResponse;
+import com.antonioalejandro.smkt.oauth.model.UserResponse;
 
 class UserResponseTest {
 	
 	@Test
 	void test() throws Exception {
 		UserResponse response = new UserResponse();
-		response.setMessage(UtilsForTesting.DATA_OK);
-		response.setStatus(UtilsForTesting.DATA_OK);
+		response.setMessage("ok");
+		response.setStatus("ok");
 		response.setUser(response.new User());
 		response.setUsers(List.of());
 		

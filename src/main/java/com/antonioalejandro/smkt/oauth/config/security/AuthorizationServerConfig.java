@@ -5,7 +5,7 @@
  * @link https://github.com/AntonioAlejandro01/SMKT_Users
  * 
  */
-package com.antonioalejandro.smkt.oauth.clients.security;
+package com.antonioalejandro.smkt.oauth.config.security;
 
 import java.util.Arrays;
 
