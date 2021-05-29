@@ -1,10 +1,3 @@
-/*
- * @Author AntonioAlejandro01
- * 
- * @link http://antonioalejandro.com
- * @link https://github.com/AntonioAlejandro01/SMKT_Users
- * 
- */
 package com.antonioalejandro.smkt.oauth.services.impl;
 
 import java.util.Arrays;
@@ -18,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import com.antonioalejandro.smkt.oauth.model.RoleResponse;
 import com.antonioalejandro.smkt.oauth.model.ScopeResponse;
@@ -28,7 +20,13 @@ import com.antonioalejandro.smkt.oauth.utils.WebClientFactory;
 
 import lombok.extern.slf4j.Slf4j;
 
-/** The Constant log. */
+/**
+ * Oauth Service Implementation Class
+ * 
+ * @author AntonioAlejandro01 - www.antonioalejandro.com
+ * @version 1.0.0
+ *
+ */
 @Slf4j
 @Service
 public class OauthServiceImpl implements OauthService, UserDetailsService {
@@ -42,20 +40,16 @@ public class OauthServiceImpl implements OauthService, UserDetailsService {
 	private DiscoveryClient discoveryClient;
 
 	/**
-	 * Load user by username.
-	 *
-	 * @param username the username
-	 * @return the user details
-	 * @throws UsernameNotFoundException the username not found exception
+	 * {@inheritDoc}
 	 */
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		final UserResponse userResponse = findUserByUsername(username);
+		final var userResponse = findUserByUsername(username);
 		if (userResponse.getUser() == null) {
 			throw new UsernameNotFoundException(String.format("User %s don't exists", username));
 		}
-		final UserResponse.User user = userResponse.getUser();
+		final var user = userResponse.getUser();
 		final GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole());
 		log.info("Usuario {} autenticado", user.getUsername());
 		log.info("User: {}", user);
@@ -65,42 +59,33 @@ public class OauthServiceImpl implements OauthService, UserDetailsService {
 	}
 
 	/**
-	 * Find user by username.
-	 *
-	 * @param username the username
-	 * @return the user response
+	 * {@inheritDoc}
 	 */
 	@Override
 	public UserResponse findUserByUsername(String username) {
-		WebClient client = WebClientFactory
-				.getWebClient(WebClientFactory.getURLInstanceService(usersId, discoveryClient), true);
+		var client = WebClientFactory.getWebClient(WebClientFactory.getURLInstanceService(usersId, discoveryClient),
+				true);
 		return client.get().uri(String.format("/users/search?filter=username&value=%s", username)).retrieve()
 				.bodyToMono(UserResponse.class).block();
 	}
 
 	/**
-	 * Find role by name.
-	 *
-	 * @param roleName the role name
-	 * @return the role response
+	 * {@inheritDoc}
 	 */
 	@Override
 	public RoleResponse findRoleByName(String roleName) {
-		WebClient client = WebClientFactory
-				.getWebClient(WebClientFactory.getURLInstanceService(usersId, discoveryClient), false);
+		var client = WebClientFactory.getWebClient(WebClientFactory.getURLInstanceService(usersId, discoveryClient),
+				false);
 		return client.get().uri(String.format("/roles/%s", roleName)).retrieve().bodyToMono(RoleResponse.class).block();
 	}
 
 	/**
-	 * Find scopes by role id.
-	 *
-	 * @param roleId the role id
-	 * @return the scope response
+	 * {@inheritDoc}
 	 */
 	@Override
 	public ScopeResponse findScopesByRoleId(Long roleId) {
-		WebClient client = WebClientFactory
-				.getWebClient(WebClientFactory.getURLInstanceService(usersId, discoveryClient), false);
+		var client = WebClientFactory.getWebClient(WebClientFactory.getURLInstanceService(usersId, discoveryClient),
+				false);
 		return client.get().uri(String.format("/scopes?roleId=%d", roleId)).retrieve().bodyToMono(ScopeResponse.class)
 				.block();
 	}

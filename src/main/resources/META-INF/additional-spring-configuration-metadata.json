@@ -1,0 +1,27 @@
+{"properties": [
+  {
+    "name": "config.security.oauth.jwt.key",
+    "type": "java.lang.String",
+    "description": "JWT Secret"
+  },
+  {
+    "name": "app-secret",
+    "type": "java.lang.String",
+    "description": "Password for smkt-users endpoint"
+  },
+  {
+    "name": "config.security.oauth.client.id",
+    "type": "java.lang.String",
+    "description": "HTTP username"
+  },
+  {
+    "name": "config.security.oauth.client.secret",
+    "type": "java.lang.String",
+    "description": "HTTP Password"
+  },
+  {
+    "name": "usersId",
+    "type": "java.lang.String",
+    "description": "smkt-users ID in smkt-eureka service"
+  }
+]}

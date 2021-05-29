@@ -1,10 +1,3 @@
-/*
- * @Author AntonioAlejandro01
- * 
- * @link http://antonioalejandro.com
- * @link https://github.com/AntonioAlejandro01/SMKT_Users
- * 
- */
 package com.antonioalejandro.smkt.oauth.services;
 
 import com.antonioalejandro.smkt.oauth.model.RoleResponse;
@@ -12,7 +5,10 @@ import com.antonioalejandro.smkt.oauth.model.ScopeResponse;
 import com.antonioalejandro.smkt.oauth.model.UserResponse;
 
 /**
- * The Interface IOauthService.
+ * The Oauth Service interface
+ * @author AntonioAlejandro01 - www.antonioalejandro.com
+ * @version 1.0.0
+ *
  */
 public interface OauthService {
 

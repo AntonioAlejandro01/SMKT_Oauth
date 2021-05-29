@@ -1,14 +1,6 @@
-/*
- * @Author AntonioAlejandro01
- * 
- * @link http://antonioalejandro.com
- * @link https://github.com/AntonioAlejandro01/SMKT_Users
- * 
- */
 package com.antonioalejandro.smkt.oauth.config.security;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +10,15 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.stereotype.Component;
 
-import com.antonioalejandro.smkt.oauth.model.RoleResponse;
-import com.antonioalejandro.smkt.oauth.model.ScopeResponse;
 import com.antonioalejandro.smkt.oauth.model.UserResponse;
 import com.antonioalejandro.smkt.oauth.services.OauthService;
 import com.antonioalejandro.smkt.oauth.utils.Constants;
 
 /**
- * The Class InfoAdicionalToken.
+ * Info Adicional Token
+ * @author AntonioAlejandro01 - www.antonioalejandro.com
+ * @version 1.0.0
+ *
  */
 @Component
 public class InfoAdicionalToken implements TokenEnhancer {
@@ -43,9 +36,9 @@ public class InfoAdicionalToken implements TokenEnhancer {
 	 */
 	@Override
 	public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
-		final Map<String, Object> info = new HashMap<>();
-		final UserResponse userResponse = oauthService.findUserByUsername(authentication.getName());
-		final UserResponse.User user = userResponse.getUser();
+		final var info = new HashMap<String, Object>();
+		final var userResponse = oauthService.findUserByUsername(authentication.getName());
+		final var user = userResponse.getUser();
 		info.put(Constants.TOKEN_FIELD_NAME, user.getName());
 		info.put(Constants.TOKEN_FIELD_LASTNAME, user.getLastname());
 		info.put(Constants.TOKEN_FIELD_EMAIL, user.getEmail());
@@ -62,11 +55,11 @@ public class InfoAdicionalToken implements TokenEnhancer {
 	 * @return the scopes from user
 	 */
 	private Set<String> getScopesFromUser(UserResponse.User user) {
-		RoleResponse roleResponse = oauthService.findRoleByName(user.getRole());
+		var roleResponse = oauthService.findRoleByName(user.getRole());
 		if (roleResponse.getRole() == null) {
 			return Set.of();
 		}
-		ScopeResponse scopeResponse = oauthService.findScopesByRoleId(roleResponse.getRole().getId());
+		var scopeResponse = oauthService.findScopesByRoleId(roleResponse.getRole().getId());
 
 		if (scopeResponse.getScopes() == null || scopeResponse.getScopes().isEmpty()) {
 			return Set.of();
