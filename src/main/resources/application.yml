@@ -2,9 +2,11 @@ spring:
  application:
   name:
    smkt-oauth
+   
 server:
  port:
   9100
+  
 eureka:
  instance:  health-check-url-path: /actuator/health
   instance-id: 

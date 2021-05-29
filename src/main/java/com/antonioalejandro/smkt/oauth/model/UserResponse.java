@@ -1,10 +1,3 @@
-/*
- * @Author AntonioAlejandro01
- * 
- * @link http://antonioalejandro.com
- * @link https://github.com/AntonioAlejandro01/SMKT_Users
- * 
- */
 package com.antonioalejandro.smkt.oauth.model;
 
 import java.util.List;
@@ -16,13 +9,13 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * The Class UserResponse.
+ * User Response Class
+ * 
+ * @author AntonioAlejandro01 - www.antonioalejandro.com
+ * @version 1.0.0
+ *
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-
-/**
- * Instantiates a new user response.
- */
 @Getter
 @Setter
 @ToString
@@ -41,7 +34,11 @@ public class UserResponse {
 	private List<User> users;
 
 	/**
-	 * Instantiates a new user.
+	 * User Class
+	 * 
+	 * @author AntonioAlejandro01 - www.antonioalejandro.com
+	 * @version 1.0.0
+	 *
 	 */
 	@Getter
 	@Setter

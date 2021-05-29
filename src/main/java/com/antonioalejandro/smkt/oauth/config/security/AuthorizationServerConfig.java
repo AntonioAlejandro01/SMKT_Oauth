@@ -1,10 +1,3 @@
-/*
- * @Author AntonioAlejandro01
- * 
- * @link http://antonioalejandro.com
- * @link https://github.com/AntonioAlejandro01/SMKT_Users
- * 
- */
 package com.antonioalejandro.smkt.oauth.config.security;
 
 import java.util.Arrays;
@@ -32,7 +25,10 @@ import lombok.extern.slf4j.Slf4j;
 
 
 /**
- * The Class AuthorizationServerConfig.
+ * Authorization Server Config Class
+ * @author AntonioAlejandro01 - www.antonioalejandro.com
+ * @version 1.0.0
+ *
  */
 @Slf4j
 @RefreshScope
@@ -87,9 +83,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	 */
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-		log.info("Property 1: {}",oauth2Properties.getClientId());
-		log.info("Property 2: {}", oauth2Properties.getClientSecret());
-		log.info("Property 3: {}", oauth2Properties.getKeyJWT());
+		log.debug("Property 1: {}",oauth2Properties.getClientId());
+		log.debug("Property 2: {}", oauth2Properties.getClientSecret());
+		log.debug("Property 3: {}", oauth2Properties.getKeyJWT());
 
 		clients.inMemory().withClient(oauth2Properties.getClientId())
 				.secret(passwordEncoder.encode(oauth2Properties.getClientSecret()))
@@ -115,7 +111,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	 */
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		final TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+		final var tokenEnhancerChain = new TokenEnhancerChain();
 		tokenEnhancerChain.setTokenEnhancers(Arrays.asList(infoAdicionalToken, accessTokenConverter()));
 		endpoints.authenticationManager(authenticationManager).tokenStore(tokenStore())
 				.accessTokenConverter(accessTokenConverter()).tokenEnhancer(tokenEnhancerChain);
@@ -138,7 +134,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	 */
 	@Bean
 	public JwtAccessTokenConverter accessTokenConverter() {
-		final JwtAccessTokenConverter tokenConverter = new JwtAccessTokenConverter();
+		final var tokenConverter = new JwtAccessTokenConverter();
 		tokenConverter.setSigningKey(oauth2Properties.getKeyJWT());
 		return tokenConverter;
 	}
