@@ -2,8 +2,9 @@
 
 Authentication and Authenticate service for SmartKitchen App
 
+![JAVA](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white) ![Spring](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
 
-[![Build Dev](https://github.com/AntonioAlejandro01/SMKT_Oauth/actions/workflows/buildDevVersion.yml/badge.svg)](https://github.com/AntonioAlejandro01/SMKT_Oauth/actions/workflows/buildDevVersion.yml) [![Build Snapshot](https://github.com/AntonioAlejandro01/SMKT_Oauth/actions/workflows/BuildSnapshot.yml/badge.svg)](https://github.com/AntonioAlejandro01/SMKT_Oauth/actions/workflows/BuildSnapshot.yml) [![Build Release](https://github.com/AntonioAlejandro01/SMKT_Oauth/actions/workflows/BuildRelease.yml/badge.svg?branch=main)](https://github.com/AntonioAlejandro01/SMKT_Oauth/actions/workflows/BuildRelease.yml) 
+[![Build Dev](https://github.com/AntonioAlejandro01/SMKT_Oauth/actions/workflows/buildDevVersion.yml/badge.svg?branch=develop)](https://github.com/AntonioAlejandro01/SMKT_Oauth/actions/workflows/buildDevVersion.yml) [![Build Snapshot](https://github.com/AntonioAlejandro01/SMKT_Oauth/actions/workflows/BuildSnapshot.yml/badge.svg)](https://github.com/AntonioAlejandro01/SMKT_Oauth/actions/workflows/BuildSnapshot.yml) [![Build Stable Version](https://github.com/AntonioAlejandro01/SMKT_Oauth/actions/workflows/BuildRelease.yml/badge.svg)](https://github.com/AntonioAlejandro01/SMKT_Oauth/actions/workflows/BuildRelease.yml)
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=AntonioAlejandro01_SMKT_Oauth&metric=alert_status)](https://sonarcloud.io/dashboard?id=AntonioAlejandro01_SMKT_Oauth) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=AntonioAlejandro01_SMKT_Oauth&metric=coverage)](https://sonarcloud.io/dashboard?id=AntonioAlejandro01_SMKT_Oauth)
 
