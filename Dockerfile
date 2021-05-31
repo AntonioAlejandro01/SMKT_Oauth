@@ -1,35 +1,30 @@
-FROM maven:3-openjdk-11 as build
+FROM maven:3-openjdk-11 as Builder
 
-WORKDIR /opt/build
+WORKDIR /build
 
-COPY . .
+COPY pom.xml .
 
-RUN mvn clean compile install
+RUN mvn clean package -Dmaven.test.skip -Dmaven.main.skip -Dspring-boot.repackage.skip && rm -r target/
+
+COPY src ./src
+
+RUN mvn clean package  -Dmaven.test.skip
 
 RUN mv ./target/smkt-oauth.jar /app.jar
 
-FROM openjdk:11
+FROM openjdk:11-jre-slim
 
 WORKDIR /opt/server
 
-COPY --from=build /app.jar  ./app.jar
+COPY --from=Builder /app.jar  ./app.jar
 
-
-ARG port=9100
-ARG eureka_url=http://smkt-eureka:8761/eureka
-ARG config_oauth_client_id=smartkitchenapp
-ARG config_oauth_client_secret=secret
-ARG config_oauth_jwt_key=U21hcnRLaXRjaGVuLVNNS1RfT2F1dGg
-ARG users_id=smkt-users
-ARG app_secret=Sm@artKitchen
-
-ENV PORT ${port}
-ENV EUREKA_URL ${eureka_url}
-ENV CONFIG_OAUTH_CLIENT_ID ${config_oauth_client_id}
-ENV CONFIG_OAUTH_CLIENT_SECRET ${config_oauth_client_secret}
-ENV CONFIG_OAUTH_JWT_KEY ${config_oauth_jwt_key}
-ENV USERS_ID ${users_id}
-ENV APP_SECRET ${app_secret}
+ENV PORT=9100
+ENV EUREKA_URL=http://smkt-eureka:8761/eureka
+ENV CONFIG_OAUTH_CLIENT_ID=smartkitchenapp
+ENV CONFIG_OAUTH_CLIENT_SECRET=secret
+ENV CONFIG_OAUTH_JWT_KEY=U21hcnRLaXRjaGVuLVNNS1RfT2F1dGg
+ENV USERS_ID=smkt-users
+ENV APP_SECRET=Sm@artKitchen
 
 EXPOSE ${PORT}
 
